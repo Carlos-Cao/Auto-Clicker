@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.event.*;
-s
+
 class AutoClicker {
     public static void main(String args[]) {
         JFrame frame = new JFrame("Auto Clicker");
