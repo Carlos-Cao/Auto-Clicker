@@ -1,29 +1,38 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.*;
 import java.lang.Thread;
-import java.awt.*;
 
-class AutoClicker {
-    public static void main(String args[]) {
+public class AutoClicker {
+    public AutoClicker() {
         JFrame frame = new JFrame("Auto Clicker");
-        JButton button = new JButton("Start");
-        JLabel label1 = new JLabel("Auto Clicker");
-        JLabel label2 = new JLabel("Set delay");
-        JLabel label3 = new JLabel("Set number of clicks");
-
+        GridBagConstraints c = new GridBagConstraints();
         frame.setLayout(new GridBagLayout());
+        frame.setIconImage(new ImageIcon("images\\mouse-cursor.png").getImage());
+
+        JButton button = new JButton("Start");
+        frame.add(button);
+
+        JLabel label1 = new JLabel("Set delay");
+        frame.add(label1);
+
+        JLabel label2 = new JLabel("Set number of clicks");
+        frame.add(label2);
+
+        JComboBox combo1 = new JComboBox();
+        frame.add(combo1);
+
+        JComboBox combo2 = new JComboBox();
+        frame.add(combo2);
+
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 200);
         frame.setResizable(false);
         frame.setVisible(true);
 
-        frame.add(label1);
-        frame.add(label2);
-        frame.add(label3);
-        frame.add(button);
-
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                JOptionPane.showMessageDialog(frame, "Press Ok to start Auto Clicking in five seconds.");
 
                 try {
                     Thread.sleep(5000);
@@ -31,14 +40,17 @@ class AutoClicker {
                     ex.printStackTrace();
                 }
 
-                main clicker = new main();
+                Main clicker = new Main();
 
                 for (int i = 0; i < 10; i++) {
                     clicker.click(InputEvent.BUTTON1_DOWN_MASK);
 
                 }
-                System.out.println("Clicking");
             }
         });
+    }
+
+    public static void main(String args[]) {
+
     }
 }

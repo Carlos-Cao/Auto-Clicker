@@ -1,10 +1,10 @@
 import java.awt.Robot;
 
-public class main {
+public class Main {
     private Robot robot;
     private int delay;
 
-    public main() {
+    public Main() {
         try {
             robot = new Robot();
         } catch (Exception e) {
