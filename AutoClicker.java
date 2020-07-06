@@ -4,31 +4,39 @@ import java.awt.event.*;
 import java.lang.Thread;
 
 public class AutoClicker {
+    private JFrame frame;
+    private JButton button;
+    private JLabel label1;
+    private JLabel label2;
+    private JComboBox combo1;
+    private JComboBox combo2;
+
     public AutoClicker() {
-        JFrame frame = new JFrame("Auto Clicker");
-        GridBagConstraints c = new GridBagConstraints();
+        frame = new JFrame("Auto Clicker");
         frame.setLayout(new GridBagLayout());
         frame.setIconImage(new ImageIcon("images\\mouse-cursor.png").getImage());
-
-        JButton button = new JButton("Start");
-        frame.add(button);
-
-        JLabel label1 = new JLabel("Set delay");
-        frame.add(label1);
-
-        JLabel label2 = new JLabel("Set number of clicks");
-        frame.add(label2);
-
-        JComboBox combo1 = new JComboBox();
-        frame.add(combo1);
-
-        JComboBox combo2 = new JComboBox();
-        frame.add(combo2);
-
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setSize(500, 200);
         frame.setResizable(false);
+        setComponents();
         frame.setVisible(true);
+    }
+
+    private void setComponents() {
+        button = new JButton("Start");
+        frame.add(button);
+
+        label1 = new JLabel("Set delay");
+        frame.add(label1);
+
+        label2 = new JLabel("Set number of clicks");
+        frame.add(label2);
+
+        combo1 = new JComboBox();
+        frame.add(combo1);
+
+        combo2 = new JComboBox();
+        frame.add(combo2);
 
         button.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -47,6 +55,7 @@ public class AutoClicker {
 
                 }
             }
+
         });
     }
 
