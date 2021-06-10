@@ -14,6 +14,7 @@ public class AutoClicker {
     private GridBagConstraints c;
     private GridBagLayout l;
 
+    // Implement GUI
     public AutoClicker() {
         frame = new JFrame("Auto Clicker");
         panel = new JPanel();
@@ -26,10 +27,12 @@ public class AutoClicker {
         frame.setResizable(false);
         setComponents();
         frame.add(panel);
+
         frame.setVisible(true);
     }
 
-    private void setComponents() {
+    // Set up Java components
+    private void setComponents()  {
         button = new JButton("Start");
         c.gridx = 5;
         c.gridy = 10;
@@ -54,7 +57,7 @@ public class AutoClicker {
         l.setConstraints(label1, c);
         panel.add(label1);
 
-        label2 = new JLabel("Set delay");
+        label2 = new JLabel("Set delay in seconds");
         c.gridx = 1;
         c.gridy = 7;
         c.gridwidth = 6;
@@ -66,7 +69,7 @@ public class AutoClicker {
         l.setConstraints(label2, c);
         panel.add(label2);
 
-        String[] datacombo1 = { "10", "50", "100", "Unlimited" };
+        Integer[] datacombo1 = { 10, 50, 100, 500, 1000 };
         combo1 = new JComboBox(datacombo1);
         c.gridx = 8;
         c.gridy = 4;
@@ -79,7 +82,7 @@ public class AutoClicker {
         l.setConstraints(combo1, c);
         panel.add(combo1);
 
-        String[] datacombo2 = { "0.5 Seconds", "1 Seconds", "2 Seconds" };
+        Integer[] datacombo2 = { 1, 2, 3, 4, 5 };
         combo2 = new JComboBox(datacombo2);
         c.gridx = 8;
         c.gridy = 7;
@@ -92,26 +95,41 @@ public class AutoClicker {
         l.setConstraints(combo2, c);
         panel.add(combo2);
 
+        // Button action listener to loop left mouse clicks
         button.addActionListener(new ActionListener() {
+
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(frame, "Press Ok to run Auto Clicker in five seconds.");
 
-                try {
-                    Thread.sleep(5000);
-                } catch (Exception ex) {
-                    ex.printStackTrace();
+                int result = JOptionPane.showConfirmDialog(frame,
+                        "Select Yes for Auto Clicker to begin clicking in 5 seconds.", "Run Auto Clicker?", JOptionPane.YES_NO_OPTION);
+
+                if (result == JOptionPane.YES_OPTION) {
+                    try {
+                        Thread.sleep(5000);
+                    } catch (Exception ex) {
+                        ex.printStackTrace();
+                    }
+
+                    Main clicker = new Main();
+                    Integer clicks = (Integer) combo1.getSelectedItem();
+                    Integer delay = (Integer) combo2.getSelectedItem();
+
+                    for (int i = 0; i < clicks; i++) {
+                        try {
+                            Thread.sleep(delay * 1000);
+                            clicker.click(InputEvent.BUTTON1_DOWN_MASK);
+                        } catch (InterruptedException interruptedException) {
+                            interruptedException.printStackTrace();
+                        }
+
+                    }
+                    JOptionPane.showMessageDialog(frame, "Auto Clicker successfully clicked " + clicks + " times.");
                 }
-
-                Main clicker = new Main();
-                for (int i = 0; i < 10; i++) {
-                    clicker.click(InputEvent.BUTTON1_DOWN_MASK);
-
+                else if (result == JOptionPane.NO_OPTION){
+                    frame.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
                 }
             }
-
         });
     }
 
-    public static void main(String args[]) {
-    }
 }

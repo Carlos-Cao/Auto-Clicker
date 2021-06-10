@@ -10,13 +10,14 @@ public class Main {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        delay = 300;
+        //delay = 250;
     }
 
+    // Robot class to control mouse
     public void click(int button) {
         try {
             robot.mousePress(button);
-            robot.delay(500);
+            //robot.delay(250);
             robot.mouseRelease(button);
             robot.delay(delay);
         } catch (Exception e) {
